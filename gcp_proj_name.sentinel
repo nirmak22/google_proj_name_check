@@ -1,8 +1,8 @@
 import "tfplan"
 
-
+log("Resources in tfplan:", tfplan.resources)
 project_name_rule = rule {
-    all tfplan.resources["google_project"] as _, r {
+    all tfplan.resources["google_projects"] as _, r {
         log("google project resources r: ", r)
         r != null and r.instances != null and r.instances is list and
         all r.instances as _, instance {
