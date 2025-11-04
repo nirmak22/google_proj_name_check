@@ -1,14 +1,11 @@
 import "tfplan"
 
-log("Resources in tfplan:", tfplan.resources)
-project_name_rule = rule {
-    all tfplan.resources["google_projects"] as _, r {
-        log("google project resources r: ", r)
-        r != null and r.instances != null and r.instances is list and
-        all r.instances as _, instance {
-            instance.attributes["name"] is string and instance.attributes["name"].starts_with("kyn")
-        
+resource_changes = tfplan.resources
+log("Resource changes: ", resource_changes)
+if resource_changes != null {
+    for r in resource_changes {
+        log("Resource: ", r)
     }
+} else {
+    log("No resources in the plan.")
 }
-
-main = rule { project_name_rule }
