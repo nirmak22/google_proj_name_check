@@ -2,8 +2,12 @@ import "tfplan"
 
 
 project_name_rule = rule {
-    all tfplan.resources["google_project"].instances as _, r {
-        r.attributes["name"] is string and r.attributes["name"].starts_with("kyn")
+    all tfplan.resources["google_project"] as _, r {
+        log("google project resources r: ", r)
+        r != null and r.instances != null and r.instances is list and
+        all r.instances as _, instance {
+            instance.attributes["name"] is string and instance.attributes["name"].starts_with("kyn")
+        
     }
 }
 
