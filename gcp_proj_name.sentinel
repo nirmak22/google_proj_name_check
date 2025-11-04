@@ -2,10 +2,3 @@ import "tfplan"
 
 resource_changes = tfplan.resources
 log("Resource changes: ", resource_changes)
-if resource_changes != null {
-    for r in resource_changes {
-        log("Resource: ", r)
-    }
-} else {
-    log("No resources in the plan.")
-}
